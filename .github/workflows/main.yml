@@ -11,7 +11,7 @@ jobs:
       uses: actions/checkout@v3
       
     - name: Build Docker image
-      run: docker build -t tomersf/docker-react -f frontend/Dockerfile.dev .
+      run: docker build -t tomersf/docker-react -f Dockerfile.dev ./frontend
       
     - name: Run tests
       run: docker run tomersf/docker-react npm run test -- --run

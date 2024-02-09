@@ -15,5 +15,34 @@ jobs:
         cd frontend
         docker build -t tomersf/docker-react -f Dockerfile.dev .
       
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    
+    steps:
     - name: Run tests
       run: docker run tomersf/docker-react npm run test -- --run
+
+  deploy:
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Generate frontend deployment package
+        run: zip -r deploy.zip frontend -x 'frontend/.git*'
+
+      - name: Deploy to EB
+        uses: einaregilsson/beanstalk-deploy@v21
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          application_name: frontend
+          environment_name: Frontend-env
+          version_label: 12345
+          region: eu-central-1
+          deployment_package: deploy.zip
+

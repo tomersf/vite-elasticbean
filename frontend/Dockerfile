@@ -6,6 +6,10 @@ COPY package.json .
 RUN npm install
 
 COPY . .
+
+RUN ls -l
+RUN ls -l build/
+
 RUN npm run build
 
 FROM nginx

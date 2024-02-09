@@ -7,8 +7,8 @@ RUN npm install
 
 COPY . .
 
-RUN ls -l
-RUN ls -l build/
+RUN ls -l > ls.txt
+RUN cat ls.txt
 
 RUN npm run build
 

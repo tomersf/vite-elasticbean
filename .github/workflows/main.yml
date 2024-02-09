@@ -65,7 +65,7 @@ jobs:
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           application_name: frontend
           environment_name: Frontend-env
-          use_existing_version_if_available: true
           region: eu-central-1
-          deployment_package: deploy.zip
+          use_existing_version_if_available: false
+          deployment_package: deploy.zips
 

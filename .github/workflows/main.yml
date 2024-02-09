@@ -17,7 +17,7 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         context: frontend
-        file: frontend/Dockerfile.dev"
+        file: frontend/Dockerfile.dev
         tags: tomersf/docker-react:latest
         outputs: type=docker,dest=/tmp/myimage.tar
 

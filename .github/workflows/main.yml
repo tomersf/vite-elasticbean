@@ -17,6 +17,7 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         context: frontend
+        file: Dockerfile.dev
         tags: tomersf/docker-react:latest
         outputs: type=docker,dest=/tmp/myimage.tar
 
@@ -41,7 +42,7 @@ jobs:
         run: |
           docker load --input /tmp/myimage.tar
           docker image ls -a
-          
+
       - name: Run tests
         run: docker run tomersf/docker-react npm run test -- --run
 

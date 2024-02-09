@@ -2,13 +2,13 @@
 	
 
 build-dev:
-	docker-compose build
+	docker-compose -f docker-compose-dev.yml build
 
 run: build-dev
-	docker-compose up
+	docker-compose -f docker-compose-dev.yml up
 
 stop:
-	docker-compose down
+	docker-compose -f docker-compose-dev.yml down
 
 delete: stop
 	 docker rmi react-app-dev
